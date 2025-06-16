@@ -3,29 +3,35 @@ from behave import given, when, then
 from time import sleep
 
 
+ADD_ITEM_BTN = (By.CSS_SELECTOR, "[id*='addToCartButtonOrText']")
+SIDE_ADD_ITEM_BTN = (By.CSS_SELECTOR, "[data-test='content-wrapper'][id*='addToCartButtonOrText']")
+VIEW_CART_BTN = (By.CSS_SELECTOR, "[href='/cart']")
+SEARCH_RESULTS = (By.XPATH, "//div[@data-test='lp-resultsCount']")
+
+
 # Add Item to Cart
 @when('Add item to cart')
 def add_item(context):
-    context.driver.find_element(By.CSS_SELECTOR, "[id*='addToCartButtonOrText']").click()
+    context.driver.find_element(*ADD_ITEM_BTN).click()
     sleep(5)
 
 # Add Item to Cart from Side Panel
 @when('Add item in side panel')
 def add_item_side_panel(context):
-    context.driver.find_element(By.CSS_SELECTOR, "[data-test='content-wrapper'][id*='addToCartButtonOrText']").click()
+    context.driver.find_element(*SIDE_ADD_ITEM_BTN).click()
     sleep(5)
 
 
 # View Cart after adding item from search results
 @when('View cart')
 def view_cart(context):
-    context.driver.find_element(By.CSS_SELECTOR, "[href='/cart']").click()
+    context.driver.find_element(*VIEW_CART_BTN).click()
     sleep(5)
 
 
 # Search results
 @then('Verify search worked for {product}')
 def verify_search_results(context, product):
-    actual_text = context.driver.find_element(By.XPATH, "//div[@data-test='lp-resultsCount']").text
+    actual_text = context.driver.find_element(*SEARCH_RESULTS).text
     assert product in actual_text, f"Error, expected {product} not in actual {actual_text}"
 
