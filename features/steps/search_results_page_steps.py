@@ -4,10 +4,10 @@ from time import sleep
 
 
 ADD_ITEM_BTN = (By.CSS_SELECTOR, "[id*='addToCartButtonOrText']")
-SIDE_ADD_ITEM_BTN = (By.CSS_SELECTOR, "[data-test='content-wrapper'][id*='addToCartButtonOrText']")
+SIDE_NAV_ADD_ITEM_BTN = (By.CSS_SELECTOR, "[data-test='content-wrapper'][id*='addToCartButtonOrText']")
 VIEW_CART_BTN = (By.CSS_SELECTOR, "[href='/cart']")
 SEARCH_RESULTS = (By.XPATH, "//div[@data-test='lp-resultsCount']")
-
+SIDE_NAV_PRODUCT_NAME = (By.CSS_SELECTOR, "[data-test='content-wrapper'] h4")
 
 # Add Item to Cart
 @when('Add item to cart')
@@ -18,15 +18,20 @@ def add_item(context):
 # Add Item to Cart from Side Panel
 @when('Add item in side panel')
 def add_item_side_panel(context):
-    context.driver.find_element(*SIDE_ADD_ITEM_BTN).click()
-    sleep(5)
+    context.driver.find_element(*SIDE_NAV_ADD_ITEM_BTN).click()
 
+
+# Store product name
+@when('Store product name')
+def store_product_name(context):
+    context.product_name = context.driver.find_element(*SIDE_NAV_PRODUCT_NAME).text
+    print('Product name store: ', context.product_name)
 
 # View Cart after adding item from search results
 @when('View cart')
 def view_cart(context):
     context.driver.find_element(*VIEW_CART_BTN).click()
-    sleep(5)
+
 
 
 # Search results

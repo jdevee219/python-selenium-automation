@@ -9,6 +9,8 @@ Feature: Cart tests
     Given Open target main page
     When Search for millennium falcon lego
     And Add item to cart
+    And Store product name
     And Add item in side panel
     And View cart
     Then Verify item has been added to cart
+    And Verify cart has correct product
