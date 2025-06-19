@@ -37,6 +37,6 @@ def view_cart(context):
 # Search results
 @then('Verify search worked for {product}')
 def verify_search_results(context, product):
-    actual_text = context.driver.find_element(*SEARCH_RESULTS).text
-    assert product in actual_text, f"Error, expected {product} not in actual {actual_text}"
-
+    # actual_text = context.driver.find_element(*SEARCH_RESULTS).text
+    # assert product in actual_text, f"Error, expected {product} not in actual {actual_text}"
+    context.app.search_results_page.verify_search_results()

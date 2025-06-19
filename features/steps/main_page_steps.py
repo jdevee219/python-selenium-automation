@@ -5,7 +5,8 @@ from time import sleep
 # Opening the webpage
 @given('Open target main page')
 def open_main(context):
-    context.driver.get('https://www.target.com/')
+    # context.driver.get('https://www.target.com/')
+    context.app.main_page.open_main_page()
 
 # Open Target Circle
 @given('Open Target Circle page')
