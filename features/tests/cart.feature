@@ -4,13 +4,14 @@ Feature: Cart tests
     Given Open target main page
     When Click on Cart icon
     Then Verify "Your cart is empty" message is shown
+    Then Verify Cart page opened
 
   Scenario: Verify item in Target Cart
     Given Open target main page
-    When Search for millennium falcon lego
-    And Add item to cart
+    When Search for mug
+    And Click on Add to Cart button
     And Store product name
-    And Add item in side panel
-    And View cart
-    Then Verify item has been added to cart
+    And Confirm Add to Cart button from side navigation
+    And Open cart page
+    Then Verify cart has 1 item(s)
     And Verify cart has correct product

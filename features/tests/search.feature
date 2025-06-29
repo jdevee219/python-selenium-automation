@@ -5,15 +5,15 @@ Feature: Tests for Target Search
     When Search for tea
     Then Verify search worked for tea
 
-#  Scenario: User can search for a mug on Target
-#    Given Open target main page
-#    When Search for mug
-#    Then Verify search worked for mug
+  Scenario: User can search for a mug on Target
+    Given Open target main page
+    When Search for mug
+    Then Verify search worked for mug
 
-#  Scenario: User can search for a coffee on Target
-#    Given Open target main page
-#    When Search for coffee
-#    Then Verify search worked for coffee
+  Scenario: User can search for a coffee on Target
+    Given Open target main page
+    When Search for coffee
+    Then Verify search worked for coffee
 
 
   Scenario Outline: User can search for a product
