@@ -15,12 +15,6 @@ def open_cart(context):
 def verify_cart_empty(context):
     context.app.cart_page.verify_cart_empty()
 
-# Item in cart
-# @then('Verify item has been added to cart')
-# def verify_item_added(context):
-#     expected_item = 'LEGO Star Wars Millennium Falcon 25th Anniversary Buildable Starship Model 75375'
-#     actual_item = context.driver.find_element(*CART_ITEM)
-#     assert expected_item == actual_item, f'Error, expected {expected_item} did not match {actual_item}'
 
 @then('Verify cart has {amount} item(s)')
 def verify_cart_items(context, amount):
