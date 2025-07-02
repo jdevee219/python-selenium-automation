@@ -37,9 +37,18 @@ def side_nav_click_add_to_cart(context):
 def view_cart(context):
     context.driver.find_element(*VIEW_CART_BTN).click()
 
+@when('Hover favorites icon')
+def hover_fav_icon(context):
+    context.app.search_results_page.hover_fav_icon()
+
 # Search results
 @then('Verify search worked for {product}')
 def verify_search_results(context, product):
     # actual_text = context.driver.find_element(*SEARCH_RESULTS).text
     # assert product in actual_text, f"Error, expected {product} not in actual {actual_text}"
     context.app.search_results_page.verify_search_results(product)
+
+
+@then('Favorites tooltip is shown')
+def verify_fav_tt_shown(context):
+    context.app.search_results_page.verify_fav_tt_shown()
