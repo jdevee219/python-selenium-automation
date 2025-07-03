@@ -1,11 +1,14 @@
+@cart
 Feature: Cart tests
 
+  @smoke
   Scenario: User can view Cart on Target
     Given Open target main page
     When Click on Cart icon
     Then Verify "Your cart is empty" message is shown
     Then Verify Cart page opened
 
+  @smoke
   Scenario: Verify item in Target Cart
     Given Open target main page
     When Search for mug

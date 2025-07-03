@@ -1,20 +1,30 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from support.logger import logger
 from time import sleep
 
 class Page:
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 15)
+        self.base_url = 'https://www.target.com/'
+
+    def open_url(self, end_url=''):
+        url = f'{self.base_url}{end_url}'
+        logger.info(f'Opening URL: {url}')
+        self.driver.get(url)
 
     def find_element(self, *locator):
+        logger.info(f'Searching for {locator}')
         return self.driver.find_element(*locator)
 
     def click(self, *locator):
+        logger.info(f'Clicking on {locator}')
         self.driver.find_element(*locator).click()
 
     def input_text(self, text, *locator):
+        logger.info(f'Entering "{text}" in {locator}')
         self.driver.find_element(*locator).send_keys(text)
 
     def hover_element(self,*locator):
@@ -25,12 +35,14 @@ class Page:
 
 
     def wait_for_element_click(self, *locator):
+        logger.info(f'Waiting and clicking on {locator}')
         self.wait.until(
             EC.element_to_be_clickable(locator),
             message=f'Element by {locator} not clickable'
         ).click()
 
     def wait_for_element(self, *locator):
+        logger.info(f'Waiting for element {locator}')
         self.wait.until(
             EC.visibility_of_element_located(locator),
             message=f'Element by {locator} not visible'
@@ -50,17 +62,17 @@ class Page:
 
     def get_current_window_id(self):
         window = self.driver.current_window_handle
-        print(f'Original window {window}')
+        logger.info(f'Original window {window}')
         return window
 
     def switch_to_new_window(self):
         self.wait.until(EC.new_window_is_opened)
         all_windows = self.driver.window_handles
-        print(f'Switching to a new window: {all_windows[1]}')
+        logger.info(f'Switching to a new window: {all_windows[1]}')
         self.driver.switch_to.window(all_windows[1])
 
     def switch_to_window_by_id(self, window_id):
-        print(f'Switching to window: {window_id}')
+        logger.info(f'Switching to window: {window_id}')
         self.driver.switch_to.window(window_id)
 
     def close_window(self):
